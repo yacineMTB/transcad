@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "nodemon --watch src --exec 'node ./index.js'",
+    "dev": "nodemon --watch . --exec 'node ./index.js'",
     "render": "node src/index.js && openscad dist/output.scad -o dist/output.stl"
   },
   "dependencies": {

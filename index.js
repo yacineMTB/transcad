@@ -1,16 +1,14 @@
+// gym
+const scadDeps = ['Round-Anything/polyround.scad'];
 const fs = require('fs');
-const { cylinder, hull, union } = require('./src/index');
+const { circle, square, polygon, cube, cylinder, polyhedron, sphere, rounded_cube, rounded_square, polyRound, polyRoundExtrude } = require('./src/index');
+// const { translate, translate_x, translate_y, translate_z, scale, scale_x, scale_y, scale_z, resize, mirror, mirror_x, mirror_y, mirror_z, rotate, rotate_x, rotate_y, rotate_z, color, radius_offset, delta_offset, projection, linear_extrude, rotate_extrude, } = require('./src/index');
 
-const wall = p => cylinder(20, 1)
-  .rotate([p, 0, 0])
+polygon(polyRound);
+const roundPolygon = polyRoundExtrude([[0, 0, 1], [5,0, 1], [10, 10,1], [0, 10,1]], 10, 4)
+  .rotate([10, 0, 0])
   .translate([0, 40, 0])
-  .rotate([0, 0, 2 * p]);
+  .rotate([0, 0, 2 * 10])
 
-const walls = [];
 
-for (let i = 0; i <= 360; i += 5) {
-    walls.push(hull(wall(i), wall(i + 5)));
-}
-
-const output = union(...walls);
-fs.writeFileSync('./dist/output.scad', output.serialize({ $fn: 100 }));
+fs.writeFileSync('./dist/output.scad', roundPolygon.serialize({ $fn: 10 }, 0, scadDeps));
