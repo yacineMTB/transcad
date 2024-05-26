@@ -1,4 +1,7 @@
 Hi! I forked this repository to write my own toolset to deal with openscad. Its a good system - but..
+# Running
+npm install && npm run dev
+
 
 **OpenSCAD** is an amazing software for creating solid 3D CAD objects, but modeling with the **OpenSCAD** language can be really cumbersome and limited. **scad-js** is a transpiler layer to avoid this pain
 
