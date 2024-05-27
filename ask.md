@@ -1,51 +1,43 @@
-  const base = {
-    ...transformations,
-    ...modifiers,
-    serialize: () => serialize(),
-  };
+// 		union() {
+// 			translate([circle_radius, circle_radius, 0])
+// 			circle(circle_radius);
+// 			translate([circle_radius, 0, 0])
+// 			square([circle_radius, circle_radius]);
+// 			translate([circle_radius, 0, 0])
+// 			square([hinge_length - circle_radius * 2, arm_width]);
+// 			translate([hinge_length - circle_radius * 2, 0, 0])
+// 			square([circle_radius, circle_radius]);
+// 			translate([hinge_length - circle_radius, circle_radius, 0])
+// 			circle(circle_radius);
+// 		}
 
-  how do i make this take this on serialize?
+if the above becomes this
 
-  To ensure that the `serialize` method within the `base` object takes `this` into account, you need to define the `serialize` method in such a way that it can access the properties of the `base` object. One way to achieve this is by using a function expression or an arrow function that references `this`.
 
-Here's how you can modify your code to ensure `serialize` takes `this` into account:
+    union(
+      circle(circle_radius).translate([circle_radius, circle_radius, 0]),
+      square([circle_radius, circle_radius]).translate([circle_radius, 0, 0]),
+      square([hinge_length - circle_radius * 2, arm_width]).translate([circle_radius, 0, 0]),
+      square([circle_radius, circle_radius]).translate([hinge_length - circle_radius * 2, 0, 0]),
+			circle(circle_radius).translate([hinge_length - circle_radius, circle_radius, 0]),
+    ),
 
-```javascript
-const base = {
-  ...transformations,
-  ...modifiers,
-  serialize() {
-    return serialize.call(this);
-  },
-};
 
-// Example serialize function that uses `this`
-function serialize() {
-  // Access properties of `this` here
-  return JSON.stringify(this);
-}
+then this becomes what?
+
+
+// 		union() {
+// 			translate([circle_radius, circle_radius, 0])
+// 			circle(thread_r);
+// 			translate([hinge_length - circle_radius, circle_radius, 0])
+// 			circle(thread_r);
+// 		}
+
+The equivalent code would be:
+
 ```
-
-In this example, `serialize` is defined as a method within the `base` object. When `serialize` is called, it uses `serialize.call(this)` to ensure that `this` refers to the `base` object.
-
-Alternatively, if you want to define `serialize` as an arrow function, you can do it like this:
-
-```javascript
-const base = {
-  ...transformations,
-  ...modifiers,
-  serialize: () => {
-    return serialize(base);
-  },
-};
-
-// Example serialize function that uses `this`
-function serialize(obj) {
-  // Access properties of `obj` here
-  return JSON.stringify(obj);
-}
+union(
+  circle(thread_r).translate([circle_radius, circle_radius, 0]),
+  circle(thread_r).translate([hinge_length - circle_radius, circle_radius, 0]),
+)
 ```
-
-In this case, the `serialize` method is an arrow function that explicitly passes the `base` object to the `serialize` function. This approach is useful if you want to avoid using `call` or `apply`.
-
-Choose the approach that best fits your needs and coding style.

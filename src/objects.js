@@ -6,7 +6,7 @@ const { create } = require('./utils.js');
 
 const undef = 'undef';
 
-const center = true;
+const center = false;
 
 const object = type => params => create({ ...transformations, ...modifiers, serialize }, { type, params });
 
@@ -88,16 +88,4 @@ const rounded_cube = ( size = 1, radius = 0.125, _params = {} ) => {
   return (_center == undefined ? center : _center) ? cube.translate([-x / 2, -y / 2, -z / 2]) : cube;
 };
 
-module.exports = {
-  circle,
-  square,
-  polygon,
-  cube,
-  cylinder,
-  polyhedron,
-  sphere,
-  rounded_cube,
-  rounded_square,
-  polyRound,
-  polyRoundExtrude,
-};
+module.exports = { circle, square, polygon, cube, cylinder, polyhedron, sphere, rounded_cube, rounded_square, polyRound, polyRoundExtrude };

@@ -6,6 +6,10 @@ const undef = 'undef';
 
 const transformation = type => (obj, params) => create({ ...transformations, ...modifiers, serialize }, { type, params, children: [obj] });
 
+const extrudeWithRadius = function ( length,r1=0,r2=0,fn=30 ) {
+  return transformation('extrudeWithRadius')(this, { length, r1, r2, fn });
+};
+
 const translate = function (v) {
   return transformation('translate')(this, { v });
 };
@@ -110,6 +114,29 @@ const rotate_extrude = function (angle = 360, params = {}) {
   });
 };
 
-const transformations = { translate, translate_x, translate_y, translate_z, scale, scale_x, scale_y, scale_z, resize, mirror, mirror_x, mirror_y, mirror_z, rotate, rotate_x, rotate_y, rotate_z, color, radius_offset, delta_offset, projection, linear_extrude, rotate_extrude, };
+const transformations = { translate,
+   translate_x,
+   translate_y,
+   translate_z,
+   scale,
+   scale_x,
+   scale_y,
+   scale_z,
+   resize,
+   mirror,
+   mirror_x,
+   mirror_y,
+   mirror_z,
+   rotate,
+   rotate_x,
+   rotate_y,
+   rotate_z,
+   color,
+   radius_offset,
+   delta_offset,
+   projection,
+   linear_extrude,
+   rotate_extrude,
+   extrudeWithRadius };
 
 module.exports = transformations;
