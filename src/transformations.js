@@ -110,7 +110,6 @@ const rotate_extrude = function (angle = 360, params = {}) {
   return transformation('rotate_extrude')(this, {
     angle,
     convexity: params.convexity || 2,
-    $fn: params.$fn || 10,
   });
 };
 

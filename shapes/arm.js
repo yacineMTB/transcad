@@ -17,4 +17,4 @@ const arm_panel = (circle_radius, hinge_length, arm_width, thread_r) => {
 
 
 
-module.exports =  arm_panel(30, 180, 50, 7);;
+module.exports =  arm_panel;;
